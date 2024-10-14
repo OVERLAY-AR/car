@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      #customButton {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background-color: transparent;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      #customButton:hover {
+        text-decoration: underline;
+      }
+
+      /* Hide the VR button */
+      .a-enter-vr-button {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: ./targets.mind"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
+      
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Add lighting to improve visibility -->
+      <a-light type="ambient" intensity="0.8" color="#FFFFFF"></a-light>
+      <a-light type="directional" intensity="0.5" position="1 1 0"></a-light>
+
+      <!-- Adjust the target and model positioning -->
+      <a-entity id="target" mindar-image-target="targetIndex: 0">
+
+        <!-- 3D model for the brakes (with brake textures) -->
+        <a-entity 
+          gltf-model="./scene.gltf"
+          material="
+            src: url(./textures/280z_Brakes_baseColor.png); 
+            roughnessMap: url(./textures/280z_Brakes_metallicRoughness.png); 
+            normalMap: url(./textures/280z_Brakes_normal.png);"
+          scale=".7 .7 .7"
+          position="0 0 0.05"
+          rotation="0 90 0">
+        </a-entity>
+
+        <!-- 3D model for the carbon fiber parts (with carbon textures) -->
+        <a-entity 
+          gltf-model="./scene.gltf"
+          material="
+            src: url(./textures/280z_Carbon_baseColor.png); 
+            roughnessMap: url(./textures/280z_Carbon_metallicRoughness.png); 
+            normalMap: url(./textures/280z_Carbon_normal.png);"
+          scale=".7 .7 .7"
+          position="0 0 0.05"
+          rotation="0 90 0">
+        </a-entity>
+
+        <!-- 3D model for the rim (with rim textures) -->
+        <a-entity 
+          gltf-model="./scene.gltf"
+          material="
+            src: url(./textures/SSR_Rim_baseColor.png); 
+            roughnessMap: url(./textures/SSR_Rim_metallicRoughness.png); 
+            normalMap: url(./textures/SSR_Rim_normal.png);"
+          scale=".7 .7 .7"
+          position="0 0 0.05"
+          rotation="0 90 0">
+        </a-entity>
+
+        <!-- 3D model for the tire (with tire textures) -->
+        <a-entity 
+          gltf-model="./scene.gltf"
+          material="
+            src: url(./textures/SSR_Tire_baseColor.png); 
+            roughnessMap: url(./textures/SSR_Tire_metallicRoughness.png); 
+            normalMap: url(./textures/SSR_Tire_normal.png);"
+          scale=".7 .7 .7"
+          position="0 0 0.05"
+          rotation="0 90 0">
+        </a-entity>
+
+        <!-- 3D model for the headlights (with headlight textures) -->
+        <a-entity 
+          gltf-model="./scene.gltf"
+          material="
+            src: url(./textures/280z_Headlight_lamp_baseColor.png);"
+          scale=".7 .7 .7"
+          position="0 0 0.05"
+          rotation="0 90 0">
+        </a-entity>
+
+      </a-entity>
+    </a-scene>
+
+    <!-- Custom Transparent Button -->
+    <button id="customButton" onclick="window.location.href='https://www.overlay-ai.com';">DEMO APP</button>
+  </body>
+</html>
